@@ -1,0 +1,64 @@
+{% extends "admin/index.html" %}
+{% load i18n %}
+
+{% block content_title %}<h1>{% trans "Dashboard" %}</h1>{% endblock %}
+
+{% block content %}
+<div class="rs-dash-stats">
+  <div class="rs-dash-card">
+    <span class="rs-dash-num">{{ rs_total_services }}</span>
+    <span class="rs-dash-label">Total Services</span>
+    <span class="rs-dash-sub">{{ rs_active_services }} active</span>
+  </div>
+  <div class="rs-dash-card">
+    <span class="rs-dash-num">{{ rs_total_courses }}</span>
+    <span class="rs-dash-label">Total Courses</span>
+    <span class="rs-dash-sub">{{ rs_active_courses }} active</span>
+  </div>
+  <div class="rs-dash-card">
+    <span class="rs-dash-num">{{ rs_total_messages }}</span>
+    <span class="rs-dash-label">Total Messages</span>
+    <span class="rs-dash-sub">{{ rs_new_messages }} new</span>
+  </div>
+</div>
+
+{% if rs_recent_enquiries %}
+<div class="module rs-dash-recent">
+  <table>
+    <caption>Recent Enquiries</caption>
+    <thead>
+      <tr><th>Name</th><th>Company</th><th>Email</th><th>Service</th><th>Status</th><th>Received</th></tr>
+    </thead>
+    <tbody>
+      {% for e in rs_recent_enquiries %}
+      <tr>
+        <td>{{ e.name }}</td>
+        <td>{{ e.company|default:"—" }}</td>
+        <td>{{ e.email }}</td>
+        <td>{{ e.get_service_required_display }}</td>
+        <td>{{ e.get_status_display }}</td>
+        <td>{{ e.created_at|date:"d M Y, H:i" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+<style>
+  .rs-dash-stats { display: flex; gap: 16px; flex-wrap: wrap; margin: 0 0 24px; }
+  .rs-dash-card {
+    background: var(--body-quiet-color, #fff);
+    border: 1px solid var(--hairline-color, #e5e5e5);
+    border-radius: 8px;
+    padding: 18px 22px;
+    min-width: 160px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .rs-dash-num { display: block; font-size: 2rem; font-weight: 700; line-height: 1.1; color: var(--link-fg, #2563eb); }
+  .rs-dash-label { display: block; font-size: 0.85rem; opacity: 0.75; margin-top: 4px; }
+  .rs-dash-sub { display: block; font-size: 0.78rem; opacity: 0.55; margin-top: 2px; }
+  .rs-dash-recent { margin-bottom: 24px; }
+</style>
+{{ block.super }}
+{% endblock %}

@@ -1,0 +1,62 @@
+{% load static %}
+<footer class="rs-footer">
+  <div class="container">
+    <div class="row gy-5 rs-footer-top">
+      <div class="col-lg-4">
+        <a href="{% url 'website:home' %}" class="rs-brand rs-footer-brand d-inline-flex">
+         
+          <img src="{% static 'img/logo-wordmark.png' %}" alt="RansomSyntax" class="rs-brand-wordmark rs-footer-wordmark">
+        </a>
+        <p class="rs-footer-tagline">{{ SITE_TAGLINE }}</p>
+        <div class="rs-social">
+          <a href="{{ SITE_YOUTUBE_URL }}" target="_blank" rel="noopener" aria-label="RansomSyntax on YouTube">
+            <i class="mdi mdi-youtube"></i>
+          </a>
+          <a href="{{ SITE_INSTAGRAM_URL }}" target="_blank" rel="noopener" aria-label="RansomSyntax on Instagram">
+            <i class="mdi mdi-instagram"></i>
+          </a>
+          <a href="mailto:{{ SITE_CONTACT_EMAIL }}" aria-label="Email RansomSyntax">
+            <i class="mdi mdi-email-outline"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-6">
+        <h6 class="rs-footer-heading">Company</h6>
+        <ul class="rs-footer-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#courses">Courses</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#industries">Industries</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-6">
+        <h6 class="rs-footer-heading">Resources</h6>
+        <ul class="rs-footer-links">
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#enquiry">Get a Quote</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4">
+        <h6 class="rs-footer-heading">Contact</h6>
+        <ul class="rs-footer-links">
+          <li><a href="mailto:{{ SITE_CONTACT_EMAIL }}">{{ SITE_CONTACT_EMAIL }}</a></li>
+          <li>Kerala, India — remote &amp; on-site engagements</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rs-footer-bottom">
+      <p class="mb-0">&copy; {% now "Y" %} {{ SITE_NAME }}. All rights reserved.</p>
+      <ul class="rs-footer-legal">
+        <li><a href="{% url 'website:privacy_policy' %}">Privacy Policy</a></li>
+        <li><a href="{% url 'website:terms_conditions' %}">Terms &amp; Conditions</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>

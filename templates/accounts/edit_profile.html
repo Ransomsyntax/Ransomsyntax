@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Edit Profile | {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<div class="smc-auth-wrap">
+  <div class="smc-auth-card">
+    <div class="text-center mb-4">
+      <div class="smc-icon-badge mx-auto mb-3"><i class="bi bi-person-gear"></i></div>
+      <h3>Edit Profile</h3>
+    </div>
+    <form method="post" enctype="multipart/form-data" novalidate>
+      {% csrf_token %}
+      <div class="mb-3">
+        <label class="form-label">Phone</label>
+        {{ form.phone }}
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Profile Photo</label>
+        {{ form.photo }}
+      </div>
+      <button type="submit" class="btn smc-btn-primary rounded-pill w-100 py-2"><i class="bi bi-check-circle"></i> Save Changes</button>
+    </form>
+    <div class="text-center mt-3">
+      <a href="{% url 'accounts:student_dashboard' %}" class="text-decoration-none"><i class="bi bi-arrow-left"></i> Back to Dashboard</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

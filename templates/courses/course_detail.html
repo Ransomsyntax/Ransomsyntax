@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ course.title }} | {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="smc-hero pb-4">
+  <div class="container">
+    <div class="row align-items-center gy-4">
+      <div class="col-lg-7">
+        <div class="smc-badge"><i class="bi bi-mortarboard"></i> {{ course.get_mode_display }}</div>
+        <h1>{{ course.title }}</h1>
+        <p class="lead">{{ course.description|default:course.short_description }}</p>
+        {% if user.is_authenticated and user.role == 'student' %}
+          {% if is_enrolled %}
+            <span class="smc-chip smc-chip-paid d-inline-flex align-items-center gap-1 mb-2"><i class="bi bi-unlock"></i> Unlocked for you</span>
+            {% if course.classroom_url %}
+              <div>
+                <a href="{{ course.classroom_url }}" target="_blank" rel="noopener" class="btn smc-btn-primary btn-lg rounded-pill px-4">
+                  <i class="bi bi-google"></i> Open Google Classroom
+                </a>
+              </div>
+            {% endif %}
+          {% else %}
+            <span class="smc-chip smc-chip-locked d-inline-flex align-items-center gap-1 mb-2"><i class="bi bi-lock-fill"></i> Locked</span>
+            <p class="text-muted">This course hasn't been assigned to your account yet. Ask your teacher, or
+              <a href="{% url 'courses:enquiry' %}">send an enquiry</a> to request access.</p>
+          {% endif %}
+        {% elif not user.is_authenticated %}
+          <a href="{% url 'accounts:student_login' %}" class="btn smc-btn-primary btn-lg rounded-pill px-4"><i class="bi bi-box-arrow-in-right"></i> Login as Student</a>
+        {% endif %}
+      </div>
+      <div class="col-lg-5 text-center">
+        {% if course.thumbnail %}
+          <img src="{{ course.thumbnail.url }}" class="img-fluid rounded-4 shadow" alt="{{ course.title }}">
+        {% else %}
+          <img src="{% static 'edu/img/logo.png' %}" class="img-fluid" style="max-width:280px;" alt="{{ course.title }}">
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="smc-section pt-0">
+  <div class="container">
+    <h3 class="fw-bold mb-4">Course Lessons</h3>
+    <div class="smc-dash-card">
+      {% for item in video_data %}
+        <div class="smc-video-row">
+          <div class="d-flex align-items-center gap-3">
+            <div class="smc-icon-badge" style="width:44px;height:44px;font-size:1.1rem;">
+              <i class="bi {% if item.can_watch %}bi-play-fill{% else %}bi-lock-fill{% endif %}"></i>
+            </div>
+            <div>
+              <div class="fw-semibold">{{ item.video.title }}</div>
+              <small class="text-muted">{{ item.video.description|truncatechars:80 }}</small>
+            </div>
+          </div>
+          <div class="text-end">
+            {% if item.video.is_free %}
+              <span class="smc-chip smc-chip-free d-block mb-1"><i class="bi bi-unlock"></i> Free</span>
+            {% elif item.can_watch %}
+              <span class="smc-chip smc-chip-paid d-block mb-1"><i class="bi bi-star"></i> Unlocked</span>
+            {% else %}
+              <span class="smc-chip smc-chip-locked d-block mb-1"><i class="bi bi-lock"></i> Premium</span>
+            {% endif %}
+
+            {% if item.can_watch %}
+              <button class="btn btn-sm smc-btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#videoModal{{ item.video.id }}">
+                <i class="bi bi-play-circle"></i> Watch
+              </button>
+              <div class="modal fade" id="videoModal{{ item.video.id }}" tabindex="-1">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">{{ item.video.title }}</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body p-0 ratio ratio-16x9">
+                      {% if item.video.video_file %}
+                        <video controls style="width:100%;height:100%;" src="{{ item.video.video_file.url }}"></video>
+                      {% elif item.video.external_url %}
+                        <iframe src="{{ item.video.external_url }}" allowfullscreen></iframe>
+                      {% else %}
+                        <p class="p-4">Video source not available.</p>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% else %}
+              {% if user.is_authenticated and user.role == 'student' %}
+                <a href="{% url 'courses:enquiry' %}" class="btn btn-sm btn-outline-secondary rounded-pill">Request Access</a>
+              {% else %}
+                <a href="{% url 'accounts:student_login' %}" class="btn btn-sm btn-outline-secondary rounded-pill">Login to unlock</a>
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+      {% empty %}
+        <p class="text-muted text-center py-4 mb-0">No lessons uploaded for this course yet. Please check back soon!</p>
+      {% endfor %}
+    </div>
+
+    <div class="alert alert-info mt-4 d-flex align-items-center gap-2">
+      <i class="bi bi-info-circle fs-5"></i>
+      <span>Premium lessons are unlocked individually by your tutor. Already selected this course? Contact your teacher or send us an
+        <a href="{% url 'courses:enquiry' %}">enquiry</a> to request access.</span>
+    </div>
+  </div>
+</section>
+{% endblock %}

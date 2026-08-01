@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Teacher Login | {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<div class="smc-auth-wrap">
+  <div class="smc-auth-card">
+    <div class="text-center mb-4">
+      <div class="smc-icon-badge mx-auto mb-3"><i class="bi bi-person-workspace"></i></div>
+      <h3>Teacher Login</h3>
+      <p class="text-muted">Teacher accounts are created by the Admin. Please use the credentials provided to you.</p>
+    </div>
+    {% if form.non_field_errors %}
+      <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+    {% endif %}
+    <form method="post" novalidate>
+      {% csrf_token %}
+      <div class="mb-3">{{ form.username }}</div>
+      <div class="mb-3">{{ form.password }}</div>
+      <button type="submit" class="btn smc-btn-primary rounded-pill w-100 py-2"><i class="bi bi-box-arrow-in-right"></i> Login</button>
+    </form>
+    <p class="text-center text-muted mt-4 mb-0">Not a teacher? <a href="{% url 'accounts:student_login' %}">Student Login</a></p>
+    <p class="text-center text-muted small mt-1">Don't have teacher access? Please contact the admin.</p>
+  </div>
+</div>
+{% endblock %}

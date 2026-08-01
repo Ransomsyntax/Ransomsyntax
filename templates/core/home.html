@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- HERO -->
+<section class="smc-hero">
+  <div class="container">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-6">
+        <div class="smc-badge"><i class="bi bi-stars"></i> Offline &amp; Online Professional Training</div>
+        <h1>Learn Today, <span class="text-gradient">Build Tomorrow.</span></h1>
+        <p class="lead">RANSOM SYNTAX bridges the gap between learning and real-world application with hands-on, expert-led programs in Data Science, AI, Ethical Hacking, Python, UI/UX Design, Video Editing &amp; Graphic Design.</p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a href="{% url 'courses:course_list' %}" class="btn smc-btn-primary btn-lg rounded-pill px-4"><i class="bi bi-collection-play"></i> Explore Courses</a>
+          <a href="{% url 'courses:enquiry' %}" class="btn btn-outline-light btn-lg rounded-pill px-4"><i class="bi bi-chat-square-text"></i> Get in Touch</a>
+        </div>
+        <div class="row mt-5 gx-4">
+          <div class="col-4 smc-stat"><h3>6+</h3><span>Career Programs</span></div>
+          <div class="col-4 smc-stat"><h3>100%</h3><span>Hands-on Projects</span></div>
+          <div class="col-4 smc-stat"><h3>Free</h3><span>YouTube Classes</span></div>
+        </div>
+      </div>
+      <div class="col-lg-6 text-center">
+        <!-- <img src="{% static 'edu/img/logo.png' %}" alt="RANSOMSYNTAX" class="smc-hero-shape img-fluid"> -->
+        <video src="{% static 'edu/img/video.mp4' %}" class="smc-hero-shape img-fluid" autoplay muted loop></video>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="smc-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="smc-badge" style="color:#0f9d7c; border-color:#bfeee2; background:#eafbf6;">OUR PROGRAMS</div>
+      <h2 class="section-title">Career-Ready Tech Skills</h2>
+      <p class="section-sub">Choose from our most in-demand programs — taught offline in small batches, or online at your own pace.</p>
+    </div>
+    <div class="row g-4">
+      {% for course in courses %}
+      <div class="col-lg-4 col-md-6">
+        <div class="smc-card p-4">
+          {% if course.thumbnail %}
+            <img src="{{ course.thumbnail.url }}" class="card-img-top mb-3" alt="{{ course.title }}">
+          {% else %}
+            <div class="smc-icon-badge mb-3"><i class="bi bi-mortarboard"></i></div>
+          {% endif %}
+          <h5 class="fw-bold mb-2">{{ course.title }}</h5>
+          <p class="text-muted small">{{ course.short_description|default:"Hands-on, project-based learning with expert mentors." }}</p>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <span class="smc-chip smc-chip-free">{{ course.get_mode_display }}</span>
+            <a href="{% url 'courses:course_detail' course.slug %}" class="fw-semibold text-decoration-none">View Course <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center text-muted">
+        Courses will appear here once added by the admin. <a href="{% url 'courses:enquiry' %}">Contact us</a> to learn more.
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-5">
+      <a href="{% url 'courses:course_list' %}" class="btn smc-btn-primary rounded-pill px-4"><i class="bi bi-grid"></i> View All Courses</a>
+    </div>
+  </div>
+</section>
+
+<!-- FREE CLASSES -->
+<section class="smc-section-dark">
+  <div class="container">
+    <div class="row align-items-center gy-4">
+      <div class="col-lg-5">
+        <div class="smc-badge"><i class="bi bi-youtube"></i> FREE FOR EVERYONE</div>
+        <h2 class="section-title" style="color:#fff;">Free Classes on YouTube</h2>
+        <p class="lead" style="color:var(--smc-text-light);">We believe quality education should be accessible. Watch our free lessons anytime on our YouTube channel, no login required.</p>
+        <a href="{{ SITE_YOUTUBE_URL }}" target="_blank" class="btn smc-btn-primary rounded-pill px-4 me-2"><i class="bi bi-youtube"></i> @learn_your_skills</a>
+        <a href="{{ SITE_INSTAGRAM_URL }}" target="_blank" class="btn btn-outline-light rounded-pill px-4"><i class="bi bi-instagram"></i> Follow us</a>
+      </div>
+      <div class="col-lg-7">
+        <div class="row g-3">
+          {% for v in free_videos %}
+          <div class="col-md-6">
+            <div class="smc-card p-3">
+              <span class="smc-chip smc-chip-free mb-2 d-inline-block"><i class="bi bi-unlock"></i> Free</span>
+              <h6 class="fw-bold mb-1">{{ v.title }}</h6>
+              <small class="text-muted">{{ v.course.title }}</small>
+              <div class="mt-2">
+                <a href="{% url 'courses:course_detail' v.course.slug %}" class="small fw-semibold text-decoration-none">Watch now <i class="bi bi-play-circle"></i></a>
+              </div>
+            </div>
+          </div>
+          {% empty %}
+          <div class="col-12">
+            <div class="smc-card p-4 text-center text-muted">
+              Free preview videos will show up here once teachers upload them. In the meantime, catch our free lessons on
+              <a href="{{ SITE_YOUTUBE_URL }}" target="_blank">YouTube</a>.
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="smc-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title">Why Choose RANSOM SYNTAX</h2>
+      <p class="section-sub">Learn from certified industry experts in a structured environment.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="smc-card p-4 h-100 text-center">
+          <div class="smc-icon-badge mx-auto mb-3"><i class="bi bi-people"></i></div>
+          <h5 class="fw-bold">Small Batches</h5>
+          <p class="text-muted small">Personalized attention with structured offline training and hands-on mentorship.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="smc-card p-4 h-100 text-center">
+          <div class="smc-icon-badge mx-auto mb-3"><i class="bi bi-kanban"></i></div>
+          <h5 class="fw-bold">Real Projects</h5>
+          <p class="text-muted small">Career-ready skills built through real project experience employers demand.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="smc-card p-4 h-100 text-center">
+          <div class="smc-icon-badge mx-auto mb-3"><i class="bi bi-patch-check"></i></div>
+          <h5 class="fw-bold">Certification</h5>
+          <p class="text-muted small">Industry-recognized certification upon completion of every program.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="smc-section-dark text-center">
+  <div class="container">
+    <h2 style="color:#fff;" class="fw-bold mb-3">Ready to start your journey?</h2>
+    <p style="color:var(--smc-text-light);" class="mb-4">Enroll today and start building your future with RANSOM SYNTAX.</p>
+    <a href="{% url 'accounts:student_register' %}" class="btn smc-btn-primary btn-lg rounded-pill px-5"><i class="bi bi-rocket-takeoff"></i> Get Started</a>
+  </div>
+</section>
+
+{% endblock %}

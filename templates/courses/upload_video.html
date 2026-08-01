@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}{% if editing %}Edit Video{% else %}Upload Video{% endif %} | {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<div class="smc-auth-wrap">
+  <div class="smc-auth-card" style="max-width:640px;">
+    <div class="text-center mb-4">
+      <div class="smc-icon-badge mx-auto mb-3"><i class="bi bi-cloud-upload"></i></div>
+      <h3>{% if editing %}Edit Video{% else %}Upload New Video{% endif %}</h3>
+      <p class="text-muted">Add a lesson to one of your courses. Mark it free or paid — you can grant paid access to individual students afterward.</p>
+    </div>
+    <form method="post" enctype="multipart/form-data" novalidate>
+      {% csrf_token %}
+      <div class="row g-3">
+        <div class="col-12">
+          <label class="form-label">Course</label>
+          {{ form.course }}
+        </div>
+        <div class="col-12">
+          <label class="form-label">Video Title</label>
+          {{ form.title }}
+        </div>
+        <div class="col-12">
+          <label class="form-label">Description</label>
+          {{ form.description }}
+        </div>
+        <div class="col-12">
+          <label class="form-label">Upload Video File</label>
+          {{ form.video_file }}
+          {% if editing and video.video_file %}<small class="text-muted">Current: {{ video.video_file.name }}</small>{% endif %}
+        </div>
+        <div class="col-12">
+          <label class="form-label">OR External Video URL (YouTube/Vimeo embed)</label>
+          {{ form.external_url }}
+        </div>
+        <div class="col-6">
+          <label class="form-label">Play Order</label>
+          {{ form.order }}
+        </div>
+        <div class="col-6 d-flex align-items-end">
+          <div class="form-check">
+            {{ form.is_free }}
+            <label class="form-check-label" for="{{ form.is_free.id_for_label }}">Mark as Free lesson</label>
+          </div>
+        </div>
+        {% if form.non_field_errors %}
+          <div class="col-12"><div class="alert alert-danger">{{ form.non_field_errors }}</div></div>
+        {% endif %}
+      </div>
+      <button type="submit" class="btn smc-btn-primary rounded-pill w-100 mt-4 py-2">
+        <i class="bi bi-check-circle"></i> {% if editing %}Save Changes{% else %}Upload Video{% endif %}
+      </button>
+    </form>
+    <div class="text-center mt-3">
+      <a href="{% url 'accounts:teacher_dashboard' %}" class="text-decoration-none"><i class="bi bi-arrow-left"></i> Back to Dashboard</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

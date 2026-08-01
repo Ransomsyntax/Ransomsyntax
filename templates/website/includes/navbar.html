@@ -1,0 +1,32 @@
+{% load static %}
+<nav class="rs-navbar navbar navbar-expand-lg fixed-top" id="rsNavbar">
+  <div class="container">
+    <a class="navbar-brand rs-brand" href="{% url 'website:home' %}">
+      <img src="{% static 'img/logo-wordmark.png' %}" alt="RansomSyntax" class="rs-brand-wordmark">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#rsNavbarContent" aria-controls="rsNavbarContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="rs-toggler-icon">
+        <span></span><span></span><span></span>
+      </span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="rsNavbarContent">
+      <ul class="navbar-nav ms-auto align-items-lg-center rs-nav-links">
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="#courses">Courses</a></li>
+        <li class="nav-item"><a class="nav-link" href="#process">Process</a></li>
+        <li class="nav-item"><a class="nav-link" href="#industries">Industries</a></li>
+        <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+          <a class="btn rs-btn-primary" href="#enquiry">Get a Quote</a>
+        </li>
+        <li class="nav-item ms-lg-3 mt-3 mt-lg-0"><a class="btn rs-btn-primary" href="{% url 'core:home' %}">For Students</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

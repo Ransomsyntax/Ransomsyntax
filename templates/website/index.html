@@ -1,0 +1,446 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block content %}
+
+{# ============================= HERO ============================= #}
+<section class="rs-hero">
+  <canvas id="rsHeroCanvas" class="rs-hero-canvas" aria-hidden="true"></canvas>
+  <div class="rs-hero-glow rs-hero-glow-a"></div>
+  <div class="rs-hero-glow rs-hero-glow-b"></div>
+
+  <div class="container rs-hero-inner">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-6">
+        <p class="rs-eyebrow"><span class="rs-eyebrow-dot"></span>Software Engineering, Done Properly</p>
+        <h1 class="rs-hero-title">
+          We turn complex problems into <span class="rs-text-gradient">clean, dependable software.</span>
+        </h1>
+        <p class="rs-hero-sub">
+          RansomSyntax designs and builds custom software, web &amp; mobile
+          applications, and cloud systems for businesses that need
+          technology partners, not vendors.
+        </p>
+        <div class="rs-hero-actions">
+          <a href="#enquiry" class="btn rs-btn-primary rs-btn-lg">Start a Project</a>
+          <a href="#services" class="btn rs-btn-ghost rs-btn-lg">Explore Services</a>
+        </div>
+        <div class="rs-hero-trust">
+          <i class="mdi mdi-shield-check-outline"></i>
+          <span>Security-first engineering &middot; Direct access to your dev team</span>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="rs-terminal" aria-hidden="true">
+          <div class="rs-terminal-bar">
+            <span class="rs-terminal-dot rs-dot-red"></span>
+            <span class="rs-terminal-dot rs-dot-yellow"></span>
+            <span class="rs-terminal-dot rs-dot-green"></span>
+            <span class="rs-terminal-title">ransomsyntax.build</span>
+          </div>
+          <div class="rs-terminal-body">
+            <pre id="rsTerminalOutput" class="rs-terminal-output"></pre>
+            <span class="rs-terminal-cursor" id="rsTerminalCursor">&#9608;</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rs-scroll-cue" aria-hidden="true">
+    <span></span>
+  </div>
+</section>
+
+{# ============================= ABOUT ============================= #}
+<section class="rs-section" id="about">
+  <div class="container">
+    <div class="row gy-5 align-items-center">
+      <div class="col-lg-5">
+        <p class="rs-eyebrow"><span class="rs-eyebrow-dot"></span>About RansomSyntax</p>
+        <h2 class="rs-section-title">Engineering discipline, applied to your product.</h2>
+        <p class="rs-body-text">
+          RansomSyntax is a software development and IT services company
+          built around a simple premise: enterprise-quality engineering
+          shouldn't require an enterprise-sized team to access it. We work
+          as an embedded technical partner — designing, building, and
+          maintaining software that holds up under real-world use.
+        </p>
+        <p class="rs-body-text">
+          From the first architecture sketch to post-launch support, every
+          engagement is handled by engineers who understand both the code
+          and the business it needs to serve.
+        </p>
+      </div>
+      <div class="col-lg-7">
+        <div class="row g-4">
+          <div class="col-sm-6">
+            <div class="rs-pillar-card">
+              <i class="mdi mdi-shield-lock-outline"></i>
+              <h3>Security-First</h3>
+              <p>Every build is developed with secure coding practices and reviewed before release.</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="rs-pillar-card">
+              <i class="mdi mdi-source-branch"></i>
+              <h3>Transparent Process</h3>
+              <p>Clear milestones, visible progress, and no black-box development.</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="rs-pillar-card">
+              <i class="mdi mdi-code-tags-check"></i>
+              <h3>Clean Codebases</h3>
+              <p>Maintainable, documented code your future team can actually work with.</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="rs-pillar-card">
+              <i class="mdi mdi-headset"></i>
+              <h3>Direct Access</h3>
+              <p>You talk to the engineers building your product — not a relay of account managers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ============================= SERVICES ============================= #}
+<section class="rs-section rs-section-alt" id="services">
+  <div class="container">
+    <div class="rs-section-header" data-aos="fade-up">
+      <p class="rs-eyebrow"><span class="rs-eyebrow-dot"></span>Our Services</p>
+      <h2 class="rs-section-title">Full-stack capability, under one roof.</h2>
+      <p class="rs-section-lead">From a single feature to a full platform rebuild, our services cover the complete software lifecycle.</p>
+    </div>
+
+    <div class="row g-4">
+      {% for service in services %}
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:'0' }}00">
+        <div class="rs-service-card">
+          <div class="rs-service-icon">
+            {% if service.image %}
+              <img src="{{ service.image.url }}" alt="{{ service.title }}">
+            {% else %}
+              <i class="mdi mdi-{{ service.icon }}"></i>
+            {% endif %}
+          </div>
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.short_description }}</p>
+          {% with features=service.feature_list %}
+          {% if features %}
+          <ul class="rs-service-features">
+            {% for feature in features %}
+            <li><i class="mdi mdi-check"></i>{{ feature }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          {% endwith %}
+        </div>
+      </div>
+      {% empty %}
+      <p class="rs-body-text">Services are managed from the admin panel — add some to see them here.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ============================= FUTURE COURSES ============================= #}
+<section class="rs-section rs-section-alt" id="courses">
+  <div class="container">
+    <div class="rs-section-header" data-aos="fade-up">
+      <p class="rs-eyebrow"><span class="rs-eyebrow-dot"></span>Upcoming Courses</p>
+      <h2 class="rs-section-title">Skills we're launching next.</h2>
+      <p class="rs-section-lead">Instructor-led, project-based training — added and managed anytime from the admin panel.</p>
+    </div>
+
+    <div class="row g-4">
+      {% for course in courses %}
+      <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:'0' }}00">
+        <div class="rs-course-card">
+          <div class="rs-course-icon">
+            {% if course.image %}
+              <img src="{{ course.image.url }}" alt="{{ course.title }}">
+            {% else %}
+              <i class="mdi mdi-{{ course.icon }}"></i>
+            {% endif %}
+          </div>
+          <h3>{{ course.title }}</h3>
+          {% if course.short_description %}<p>{{ course.short_description }}</p>{% endif %}
+          <span class="rs-course-badge">Coming Soon</span>
+        </div>
+      </div>
+      {% empty %}
+      <p class="rs-body-text">Courses are managed from the admin panel — add some to see them here.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ============================= WHY CHOOSE US ============================= #}
+<section class="rs-section" id="why-us">
+  <div class="container">
+    <div class="row gy-5 align-items-center">
+      <div class="col-lg-5">
+        <p class="rs-eyebrow"><span class="rs-eyebrow-dot"></span>Why Choose Us</p>
+        <h2 class="rs-section-title">What working with us actually looks like.</h2>
+        <p class="rs-body-text">
+          No inflated claims, no vague promises — just a clear account of
+          how we operate day to day.
+        </p>
+      </div>
+      <div class="col-lg-7">
+        <ul class="rs-why-list">
+          <li>
+            <i class="mdi mdi-check-circle-outline"></i>
+            <div><strong>Engineers, not intermediaries.</strong> You work directly with the people writing your code.</div>
+          </li>
+          <li>
+            <i class="mdi mdi-check-circle-outline"></i>
+            <div><strong>Fixed, transparent process.</strong> You know what phase your project is in at all times.</div>
+          </li>
+          <li>
+            <i class="mdi mdi-check-circle-outline"></i>
+            <div><strong>Security built in, not bolted on.</strong> Informed by hands-on penetration testing and secure coding standards.</div>
+          </li>
+          <li>
+            <i class="mdi mdi-check-circle-outline"></i>
+            <div><strong>Support after launch.</strong> Maintenance plans keep systems reliable long after go-live.</div>
+          </li>
+          <li>
+            <i class="mdi mdi-check-circle-outline"></i>
+            <div><strong>Design that's actually usable.</strong> Interfaces are tested for clarity, not just visual polish.</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ============================= PROCESS ============================= #}
+<section class="rs-section rs-section-alt" id="process">
+  <div class="container">
+    <div class="rs-section-header" data-aos="fade-up">
+      <p class="rs-eyebrow"><span class="rs-eyebrow-dot"></span>Development Process</p>
+      <h2 class="rs-section-title">A sequence, not a guess.</h2>
+      <p class="rs-section-lead">Every engagement moves through the same six stages, in order, so nothing gets skipped.</p>
+    </div>
+
+    <div class="rs-process-track">
+      {% for step in process_steps %}
+      <div class="rs-process-step">
+        <span class="rs-process-number">{{ step.step }}</span>
+        <h3>{{ step.title }}</h3>
+        <p>{{ step.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ============================= TECHNOLOGIES ============================= #}
+<section class="rs-section" id="technologies">
+  <div class="container">
+    <div class="rs-section-header" data-aos="fade-up">
+      <p class="rs-eyebrow"><span class="rs-eyebrow-dot"></span>Technologies We Use</p>
+      <h2 class="rs-section-title">A modern, battle-tested stack.</h2>
+    </div>
+
+    <div class="row g-4">
+      {% for category, stack in technologies.items %}
+      <div class="col-md-6 col-lg-4">
+        <div class="rs-tech-card">
+          <h3>{{ category }}</h3>
+          <div class="rs-tech-tags">
+            {% for tech in stack %}
+            <span class="rs-tech-tag">{{ tech }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ============================= INDUSTRIES ============================= #}
+<section class="rs-section rs-section-alt" id="industries">
+  <div class="container">
+    <div class="rs-section-header" data-aos="fade-up">
+      <p class="rs-eyebrow"><span class="rs-eyebrow-dot"></span>Industries We Serve</p>
+      <h2 class="rs-section-title">Domain-aware, wherever you operate.</h2>
+    </div>
+
+    <div class="row g-3">
+      {% for industry in industries %}
+      <div class="col-6 col-md-3">
+        <div class="rs-industry-card">
+          <i class="mdi mdi-{{ industry.icon }}"></i>
+          <span>{{ industry.name }}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ============================= TESTIMONIALS ============================= #}
+<section class="rs-section" id="testimonials">
+  <div class="container">
+    <div class="rs-section-header" data-aos="fade-up">
+      <p class="rs-eyebrow"><span class="rs-eyebrow-dot"></span>Testimonials</p>
+      <h2 class="rs-section-title">What clients say to work with us.</h2>
+      <p class="rs-section-lead">Illustrative sample testimonials — placeholders for real client quotes.</p>
+    </div>
+
+    <div class="row g-4">
+      {% for t in testimonials %}
+      <div class="col-lg-4">
+        <div class="rs-testimonial-card">
+          <i class="mdi mdi-format-quote-open"></i>
+          <p>{{ t.quote }}</p>
+          <div class="rs-testimonial-author">
+            <span class="rs-testimonial-name">{{ t.name }}</span>
+            <span class="rs-testimonial-role">{{ t.role }}</span>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ============================= FAQ ============================= #}
+<section class="rs-section rs-section-alt" id="faq">
+  <div class="container">
+    <div class="row gy-5">
+      <div class="col-lg-4">
+        <p class="rs-eyebrow"><span class="rs-eyebrow-dot"></span>FAQ</p>
+        <h2 class="rs-section-title">Common questions, answered plainly.</h2>
+        <p class="rs-body-text">Don't see your question? <a href="#enquiry" class="rs-inline-link">Ask us directly</a>.</p>
+      </div>
+      <div class="col-lg-8">
+        <div class="accordion rs-accordion" id="rsFaqAccordion">
+          {% for faq in faqs %}
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="faqHeading{{ forloop.counter }}">
+              <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqCollapse{{ forloop.counter }}"
+                      aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+                      aria-controls="faqCollapse{{ forloop.counter }}">
+                {{ faq.question }}
+              </button>
+            </h3>
+            <div id="faqCollapse{{ forloop.counter }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}"
+                 aria-labelledby="faqHeading{{ forloop.counter }}" data-bs-parent="#rsFaqAccordion">
+              <div class="accordion-body">{{ faq.answer }}</div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ============================= ENQUIRY FORM ============================= #}
+<section class="rs-section rs-enquiry-section" id="enquiry">
+  <div class="rs-enquiry-glow"></div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div class="rs-enquiry-card">
+          <div class="rs-section-header rs-section-header-center">
+            <p class="rs-eyebrow rs-eyebrow-center"><span class="rs-eyebrow-dot"></span>Client Enquiry</p>
+            <h2 class="rs-section-title">Tell us about your project.</h2>
+            <p class="rs-section-lead">Share a few details and our team will follow up within one business day.</p>
+          </div>
+
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-success{% endif %} rs-alert" role="alert">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+
+          <form method="post" action="{% url 'website:home' %}#enquiry" novalidate class="rs-form">
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="{{ form.name.id_for_label }}" class="form-label">Name *</label>
+                {{ form.name }}
+                {% if form.name.errors %}<div class="rs-field-error">{{ form.name.errors.0 }}</div>{% endif %}
+              </div>
+              <div class="col-md-6">
+                <label for="{{ form.company.id_for_label }}" class="form-label">Company</label>
+                {{ form.company }}
+              </div>
+              <div class="col-md-6">
+                <label for="{{ form.email.id_for_label }}" class="form-label">Email *</label>
+                {{ form.email }}
+                {% if form.email.errors %}<div class="rs-field-error">{{ form.email.errors.0 }}</div>{% endif %}
+              </div>
+              <div class="col-md-6">
+                <label for="{{ form.phone.id_for_label }}" class="form-label">Phone</label>
+                {{ form.phone }}
+                {% if form.phone.errors %}<div class="rs-field-error">{{ form.phone.errors.0 }}</div>{% endif %}
+              </div>
+              <div class="col-md-6">
+                <label for="{{ form.service_required.id_for_label }}" class="form-label">Service Required *</label>
+                {{ form.service_required }}
+              </div>
+              <div class="col-md-6">
+                <label for="{{ form.budget.id_for_label }}" class="form-label">Budget <span class="rs-optional">(optional)</span></label>
+                {{ form.budget }}
+              </div>
+              <div class="col-12">
+                <label for="{{ form.project_description.id_for_label }}" class="form-label">Project Description *</label>
+                {{ form.project_description }}
+                {% if form.project_description.errors %}<div class="rs-field-error">{{ form.project_description.errors.0 }}</div>{% endif %}
+              </div>
+              <div class="col-12 text-center pt-2">
+                <button type="submit" class="btn rs-btn-primary rs-btn-lg">Submit Enquiry</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ============================= CONTACT ============================= #}
+<section class="rs-section" id="contact">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="rs-contact-card">
+          <i class="mdi mdi-email-outline"></i>
+          <h3>Email</h3>
+          <a href="mailto:{{ SITE_CONTACT_EMAIL }}">{{ SITE_CONTACT_EMAIL }}</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="rs-contact-card">
+          <i class="mdi mdi-youtube"></i>
+          <h3>YouTube</h3>
+          <a href="{{ SITE_YOUTUBE_URL }}" target="_blank" rel="noopener">@learn_your_skills</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="rs-contact-card">
+          <i class="mdi mdi-instagram"></i>
+          <h3>Instagram</h3>
+          <a href="{{ SITE_INSTAGRAM_URL }}" target="_blank" rel="noopener">@learn_your_skills</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

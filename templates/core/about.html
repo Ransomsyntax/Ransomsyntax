@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}About Us | {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="smc-hero pb-4">
+  <div class="container text-center">
+    <div class="smc-badge mx-auto"><i class="bi bi-info-circle"></i> WHO WE ARE</div>
+    <h1>About <span class="text-gradient">RANSOM SYNTAX</span></h1>
+    <p class="lead mx-auto" style="max-width:700px;">RANSOM SYNTAX is a professional training institute dedicated to empowering learners with cutting-edge tech skills, offline and online.</p>
+  </div>
+</section>
+
+<section class="smc-section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="smc-card p-4 h-100">
+          <div class="smc-icon-badge mb-3"><i class="bi bi-building"></i></div>
+          <h5 class="fw-bold">About Us</h5>
+          <p class="text-muted">RANSOM SYNTAX is an offline professional training institute dedicated to empowering learners with cutting-edge tech skills. We bridge the gap between learning and real-world application through hands-on, expert-led programs.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="smc-card p-4 h-100">
+          <div class="smc-icon-badge mb-3"><i class="bi bi-bullseye"></i></div>
+          <h5 class="fw-bold">Our Mission</h5>
+          <p class="text-muted">We are committed to delivering high-quality, industry-relevant education in Data Science, AI, Python, UI/UX Design, Video Editing, and Graphic Design — building the next generation of tech professionals.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="smc-card p-4 h-100">
+          <div class="smc-icon-badge mb-3"><i class="bi bi-award"></i></div>
+          <h5 class="fw-bold">Why Choose Us</h5>
+          <p class="text-muted">Learn from certified industry experts in a structured environment. Small batch sizes ensure personalized attention, real project experience, and career-ready skills.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="smc-section-dark text-center">
+  <div class="container">
+    <h2 style="color:#fff;" class="fw-bold mb-3">Learn Today, Build Tomorrow</h2>
+    <p style="color:var(--smc-text-light);" class="mb-4 mx-auto" style="max-width:650px;">Join RANSOM SYNTAX and transform your career with our offline &amp; online professional training programs. Expert mentors, real-world projects, and industry-recognized certifications await you.</p>
+    <a href="{% url 'accounts:student_register' %}" class="btn smc-btn-primary btn-lg rounded-pill px-5"><i class="bi bi-rocket-takeoff"></i> Enroll Today</a>
+  </div>
+</section>
+{% endblock %}

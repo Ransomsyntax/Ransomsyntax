@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Delete Video | {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<div class="smc-auth-wrap">
+  <div class="smc-auth-card text-center">
+    <div class="smc-icon-badge mx-auto mb-3" style="background:linear-gradient(135deg,#e74c3c,#c0392b);"><i class="bi bi-exclamation-triangle"></i></div>
+    <h4>Delete "{{ video.title }}"?</h4>
+    <p class="text-muted">This action cannot be undone. All access grants for this video will also be removed.</p>
+    <form method="post" class="d-flex gap-3 justify-content-center mt-3">
+      {% csrf_token %}
+      <a href="{% url 'accounts:teacher_dashboard' %}" class="btn btn-outline-secondary rounded-pill px-4">Cancel</a>
+      <button type="submit" class="btn btn-danger rounded-pill px-4"><i class="bi bi-trash"></i> Delete Video</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

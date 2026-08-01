@@ -1,0 +1,44 @@
+{% extends "website/base.html" %}
+{% block title %}Terms &amp; Conditions — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="rs-section rs-legal-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <p class="rs-eyebrow"><span class="rs-eyebrow-dot"></span>Legal</p>
+        <h1 class="rs-section-title">Terms &amp; Conditions</h1>
+        <p class="rs-body-text rs-legal-placeholder-note">
+          This is placeholder legal copy. Replace it with terms reviewed by
+          qualified counsel before publishing this site.
+        </p>
+
+        <h2 class="rs-legal-heading">Use of This Website</h2>
+        <p class="rs-body-text">
+          This website is provided for informational purposes to describe
+          RansomSyntax's services. Content may be updated at any time
+          without notice.
+        </p>
+
+        <h2 class="rs-legal-heading">Enquiries &amp; Engagements</h2>
+        <p class="rs-body-text">
+          Submitting the enquiry form does not create a contractual
+          relationship. Project engagements are governed by a separate
+          signed agreement between RansomSyntax and the client.
+        </p>
+
+        <h2 class="rs-legal-heading">Intellectual Property</h2>
+        <p class="rs-body-text">
+          All branding, logos, and content on this site are the property of
+          RansomSyntax unless otherwise noted.
+        </p>
+
+        <h2 class="rs-legal-heading">Contact</h2>
+        <p class="rs-body-text">
+          Questions about these terms can be sent to
+          <a href="mailto:{{ SITE_CONTACT_EMAIL }}">{{ SITE_CONTACT_EMAIL }}</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

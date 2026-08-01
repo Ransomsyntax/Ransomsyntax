@@ -1,0 +1,43 @@
+{% extends "website/base.html" %}
+{% block title %}Privacy Policy — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="rs-section rs-legal-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <p class="rs-eyebrow"><span class="rs-eyebrow-dot"></span>Legal</p>
+        <h1 class="rs-section-title">Privacy Policy</h1>
+        <p class="rs-body-text rs-legal-placeholder-note">
+          This is placeholder legal copy. Replace it with a policy reviewed by
+          qualified counsel before publishing this site.
+        </p>
+
+        <h2 class="rs-legal-heading">Information We Collect</h2>
+        <p class="rs-body-text">
+          When you submit our client enquiry form, we collect the
+          information you provide — your name, company, email, phone
+          number, and project details — solely to respond to your enquiry.
+        </p>
+
+        <h2 class="rs-legal-heading">How We Use Information</h2>
+        <p class="rs-body-text">
+          Information submitted through this site is used to evaluate and
+          respond to enquiries, and is not sold to third parties.
+        </p>
+
+        <h2 class="rs-legal-heading">Data Retention</h2>
+        <p class="rs-body-text">
+          Enquiry records are retained as long as reasonably necessary for
+          business follow-up and may be deleted on request.
+        </p>
+
+        <h2 class="rs-legal-heading">Contact</h2>
+        <p class="rs-body-text">
+          Questions about this policy can be sent to
+          <a href="mailto:{{ SITE_CONTACT_EMAIL }}">{{ SITE_CONTACT_EMAIL }}</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

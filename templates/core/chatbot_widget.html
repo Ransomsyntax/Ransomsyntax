@@ -1,0 +1,34 @@
+{% load static %}
+<div id="smc-chatbot">
+  <button id="smc-chat-toggle" class="smc-chat-toggle" aria-label="Open help chat">
+    <i class="bi bi-chat-dots-fill"></i>
+    <span class="smc-chat-pulse"></span>
+  </button>
+
+  <div id="smc-chat-window" class="smc-chat-window shadow-lg d-none">
+    <div class="smc-chat-header">
+      <img src="{% static 'edu/img/logo.png' %}" alt="bot">
+      <div>
+        <strong>RANSOM SYNTAX Assistant</strong>
+        <small class="d-block">Ask me anything about our courses!</small>
+      </div>
+      <button id="smc-chat-close" class="btn-close btn-close-white ms-auto" aria-label="Close"></button>
+    </div>
+    <div id="smc-chat-body" class="smc-chat-body">
+      <div class="smc-msg smc-msg-bot">
+        Hi! 👋 I'm here to help. Ask me about courses, fees, free classes, or how to register/login.
+      </div>
+    </div>
+    <div class="smc-chat-quick">
+      <button type="button" class="smc-quick-btn" data-q="What courses do you offer?">Courses</button>
+      <button type="button" class="smc-quick-btn" data-q="Do you have free classes?">Free classes</button>
+      <button type="button" class="smc-quick-btn" data-q="How do I register?">Register</button>
+      <button type="button" class="smc-quick-btn" data-q="What are the fees?">Fees</button>
+    </div>
+    <form id="smc-chat-form" class="smc-chat-form">
+      {% csrf_token %}
+      <input type="text" id="smc-chat-input" placeholder="Type your question..." autocomplete="off" required>
+      <button type="submit"><i class="bi bi-send-fill"></i></button>
+    </form>
+  </div>
+</div>

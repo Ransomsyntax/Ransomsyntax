@@ -1,0 +1,42 @@
+{% load static %}
+<div class="rs-chat" id="rsChat">
+  <button class="rs-chat-toggle" id="rsChatToggle" aria-expanded="false" aria-controls="rsChatPanel" aria-label="Open help chat">
+    <i class="mdi mdi-message-text-outline rs-chat-icon-open"></i>
+    <i class="mdi mdi-close rs-chat-icon-close"></i>
+  </button>
+
+  <div class="rs-chat-panel" id="rsChatPanel" role="dialog" aria-label="RansomSyntax help chat">
+    <div class="rs-chat-header">
+      <div class="rs-chat-header-info">
+        <span class="rs-chat-status-dot"></span>
+        <div>
+          <p class="rs-chat-header-title">RansomSyntax Assistant</p>
+          <p class="rs-chat-header-sub">Typically replies within a day</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="rs-chat-body" id="rsChatBody">
+      <div class="rs-chat-msg rs-chat-msg-bot">
+        Hi, welcome to RansomSyntax 👋 I can point you to the right service, share
+        typical timelines, or connect you with our team. What brings you here today?
+      </div>
+      <div class="rs-chat-quick-replies" id="rsChatQuickReplies">
+        <button type="button" class="rs-chat-chip" data-msg="What services do you offer?">Services</button>
+        <button type="button" class="rs-chat-chip" data-msg="How much does a project cost?">Pricing</button>
+        <button type="button" class="rs-chat-chip" data-msg="How long does a project take?">Timelines</button>
+        <button type="button" class="rs-chat-chip" data-msg="How can I contact your team?">Contact</button>
+      </div>
+    </div>
+
+    <form class="rs-chat-input" id="rsChatForm" autocomplete="off">
+      <input type="text" id="rsChatInput" placeholder="Type your message..." aria-label="Type your message" required>
+      <button type="submit" aria-label="Send message"><i class="mdi mdi-send"></i></button>
+    </form>
+    <p class="rs-chat-disclaimer">
+      This assistant uses placeholder responses for common questions. For a
+      detailed reply, use the <a href="#enquiry">enquiry form</a> or email
+      <a href="mailto:{{ SITE_CONTACT_EMAIL }}">{{ SITE_CONTACT_EMAIL }}</a>.
+    </p>
+  </div>
+</div>
