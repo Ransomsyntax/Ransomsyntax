@@ -46,10 +46,11 @@ ALLOWED_HOSTS = [
     h.strip()
     for h in os.environ.get(
         "DJANGO_ALLOWED_HOSTS",
-        "127.0.0.1,localhost,.vercel.app"
+        "127.0.0.1,localhost,.onrender.com,.vercel.app"
     ).split(",")
     if h.strip()
 ]
+
 CSRF_TRUSTED_ORIGINS = [
     o.strip()
     for o in os.environ.get("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",")
