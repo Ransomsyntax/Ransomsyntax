@@ -76,19 +76,19 @@ INDUSTRIES = [
 
 TESTIMONIALS = [
     {
-        "quote": "RansomSyntax rebuilt our internal platform without a single day of downtime. The communication throughout was exceptional.",
-        "name": "Anita Sharma",
-        "role": "Operations Director, sample placeholder client",
+        "quote": "At RansomSyntax, we focus on delivering reliable, scalable, and business-driven technology solutions. Our goal is to help clients grow through innovation, quality, and long-term support.",
+        "name": "Surya S",
+        "role": "CEO & Co-Founder, RansomSyntax",
     },
     {
-        "quote": "They caught architectural issues our previous vendor missed entirely, and fixed them before launch.",
-        "name": "David Chen",
-        "role": "CTO, sample placeholder client",
+        "quote": "Building scalable, secure, and future-ready solutions is at the core of our engineering philosophy. Every project is designed with performance, reliability, and long-term growth in mind.",
+        "name": "Jitto James",
+        "role": "CTO & Co-Founder, RansomSyntax",
     },
     {
-        "quote": "Professional, precise, and genuinely invested in getting the product right, not just shipped.",
-        "name": "Fatima Al-Sayed",
-        "role": "Founder, sample placeholder client",
+        "quote": "Efficient execution, transparent communication, and a commitment to quality are the principles that drive every project we undertake at RansomSyntax.",
+        "name": "Jesvin Sanoj",
+        "role": "COO, RansomSyntax",
     },
 ]
 
